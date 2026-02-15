@@ -9,6 +9,7 @@ const HERO_BG = "https://cdn.poehali.dev/projects/2c95a5fb-af37-4442-b02a-84053e
 
 const SERVER_IP = "matrichapvp";
 const VERSIONS = "1.18.2 — 1.21.11";
+const BOT_USERNAME = "Matrichabot";
 
 interface DonateItem {
   name: string;
@@ -258,6 +259,9 @@ const Index = () => {
   const handleSubmit = () => {
     if (nickname.trim().length >= 3) {
       setSubmitted(true);
+      const donate = DONATES.find((d) => d.name === selectedDonate);
+      const msg = `${nickname.trim()} ${selectedDonate} ${donate?.price || ""}`;
+      window.open(`https://t.me/${BOT_USERNAME}?start=${encodeURIComponent(msg)}`, "_blank");
     }
   };
 
@@ -529,8 +533,14 @@ const Index = () => {
                 Донат: <span className="text-accent font-bold">{selectedDonate}</span>
               </p>
               <p className="text-xs text-muted-foreground">
-                Свяжитесь с администрацией для завершения оплаты
+                Бот открыт в Telegram — следуй инструкциям!
               </p>
+              <Button
+                onClick={() => window.open(`https://t.me/${BOT_USERNAME}`, "_blank")}
+                className="mt-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-bold"
+              >
+                <Icon name="Send" size={16} className="mr-2" /> Открыть бота
+              </Button>
             </div>
           )}
         </DialogContent>
